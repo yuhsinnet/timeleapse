@@ -28,7 +28,7 @@ namespace TimeLeapse
         {
             label5.Text = "Login OK!";
         }
-       
+
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
@@ -88,6 +88,8 @@ namespace TimeLeapse
         private void axGVSinglePlayer1_SearchEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEvent e)
         {
             label5.Text = "Search OK!  " + e.lpStartTime;
+            axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + 
+                                        string.Format("\\TimeLeapse\\image[0].jpg", e.lpStartTime));
 
         }
     }
