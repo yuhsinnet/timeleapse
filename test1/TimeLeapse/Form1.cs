@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace TimeLeapse
@@ -22,6 +23,20 @@ namespace TimeLeapse
                                      txtUser.Text,
                                      txtPwd.Text);//   'Start login process
 
+
+        }
+
+        private void SnapShot(object state)
+        {
+
+            bool SnapOK =
+axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
+                            "\\TimeLeapse\\image" + state.ToString() + ".jpg" );
+            
+
+
+
+            //throw new NotImplementedException();
         }
 
         private void axGVSinglePlayer1_LoginOK(object sender, EventArgs e)
@@ -32,12 +47,7 @@ namespace TimeLeapse
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            int HostType = 0;
-            int nDBType = 0; //Default value is 0. Reserved.
-            int nCamera = 2;
-            string lpDateTime = dateTimePicker1.Value.ToString("yyyyMMddHHmmss") + "002";
 
-            axGVSinglePlayer1.SearchAndPlay(HostType, nDBType, nCamera, lpDateTime);
         }
 
         private void axGVSinglePlayer1_LoginEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_LoginEvent e)
@@ -87,10 +97,23 @@ namespace TimeLeapse
 
         private void axGVSinglePlayer1_SearchEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEvent e)
         {
-            label5.Text = "Search OK!  " + e.lpStartTime;
-            axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + 
-                                        string.Format("\\TimeLeapse\\image[0].jpg", e.lpStartTime));
 
+            string NowTime = e.lpNowTime;
+
+            System.Threading.Timer SnapTime
+      = new System.Threading.Timer(SnapShot, NowTime, 5000, Timeout.Infinite); //傳入調閱時間
+            label5.Text = "Search OK!  " + e.lpNowTime;
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int HostType = 0;
+            int nDBType = 0; //Default value is 0. Reserved.
+            int nCamera = 2;
+            string lpDateTime = dateTimePicker1.Value.ToString("yyyyMMddHHmmss") + "002";
+
+            axGVSinglePlayer1.Search(HostType, nDBType, nCamera, lpDateTime);
         }
     }
 }

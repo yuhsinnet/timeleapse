@@ -47,6 +47,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axGVSinglePlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             this.axGVSinglePlayer1.Location = new System.Drawing.Point(12, 12);
             this.axGVSinglePlayer1.Name = "axGVSinglePlayer1";
             this.axGVSinglePlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axGVSinglePlayer1.OcxState")));
-            this.axGVSinglePlayer1.Size = new System.Drawing.Size(474, 426);
+            this.axGVSinglePlayer1.Size = new System.Drawing.Size(1920, 1080);
             this.axGVSinglePlayer1.TabIndex = 0;
             this.axGVSinglePlayer1.LoginOK += new System.EventHandler(this.axGVSinglePlayer1_LoginOK);
             this.axGVSinglePlayer1.SearchEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEventHandler(this.axGVSinglePlayer1_SearchEvent);
@@ -214,11 +215,22 @@
             this.label8.TabIndex = 18;
             this.label8.Text = "VideoDate Time:";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(620, 62);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 19;
+            this.button3.Text = "Set Time";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 480);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -266,6 +278,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button button3;
     }
 }
 
