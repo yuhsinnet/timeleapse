@@ -10,19 +10,12 @@ namespace TimeLeapse
             InitializeComponent();
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
 
-
-
-
-            dateTimePicker1.Value = e.Start;
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             axGVSinglePlayer1.ShowTreeList = true;
-
+            axGVSinglePlayer1.PlayMode = 0;
 
             axGVSinglePlayer1.Login2(txtIP.Text,
                                      int.Parse(txtPort.Text),
@@ -90,6 +83,12 @@ namespace TimeLeapse
         private void button2_Click(object sender, EventArgs e)
         {
             axGVSinglePlayer1.GetBitmap(true, Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\image.bmp");
+        }
+
+        private void axGVSinglePlayer1_SearchEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEvent e)
+        {
+            label5.Text = "Search OK!  " + e.lpStartTime;
+
         }
     }
 }

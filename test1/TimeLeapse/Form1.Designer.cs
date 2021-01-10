@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.axGVSinglePlayer1 = new AxGVSINGLEPLAYERLib.AxGVSinglePlayer();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.txtPort = new System.Windows.Forms.TextBox();
@@ -43,6 +42,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.axGVSinglePlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,22 +59,16 @@
             this.axGVSinglePlayer1.Size = new System.Drawing.Size(474, 426);
             this.axGVSinglePlayer1.TabIndex = 0;
             this.axGVSinglePlayer1.LoginOK += new System.EventHandler(this.axGVSinglePlayer1_LoginOK);
+            this.axGVSinglePlayer1.SearchEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEventHandler(this.axGVSinglePlayer1_SearchEvent);
             this.axGVSinglePlayer1.LoginEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_LoginEventHandler(this.axGVSinglePlayer1_LoginEvent);
-            // 
-            // monthCalendar1
-            // 
-            this.monthCalendar1.Location = new System.Drawing.Point(498, 12);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 1;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.CustomFormat = "yyyy/MM/dd HH:mm";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(498, 186);
+            this.dateTimePicker1.Location = new System.Drawing.Point(553, 34);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(220, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(142, 22);
             this.dateTimePicker1.TabIndex = 2;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
@@ -171,11 +169,61 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "yyyy/MM/dd HH:mm";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(553, 158);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(142, 22);
+            this.dateTimePicker2.TabIndex = 14;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.CustomFormat = "yyyy/MM/dd HH:mm";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(553, 186);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(142, 22);
+            this.dateTimePicker3.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(496, 165);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 12);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Start Date:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(499, 193);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(50, 12);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "StopDate:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(499, 19);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(84, 12);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "VideoDate Time:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(729, 480);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.dateTimePicker3);
+            this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -188,7 +236,6 @@
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtIP);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.axGVSinglePlayer1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -202,7 +249,6 @@
         #endregion
 
         private AxGVSINGLEPLAYERLib.AxGVSinglePlayer axGVSinglePlayer1;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.TextBox txtPort;
@@ -215,6 +261,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 
