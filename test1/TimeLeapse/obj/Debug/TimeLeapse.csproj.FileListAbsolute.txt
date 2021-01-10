@@ -1,0 +1,15 @@
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\bin\Debug\TimeLeapse.exe.config
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\bin\Debug\TimeLeapse.exe
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\bin\Debug\TimeLeapse.pdb
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\bin\Debug\Interop.GVSINGLEPLAYERLib.dll
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\bin\Debug\AxInterop.GVSINGLEPLAYERLib.dll
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.csprojAssemblyReference.cache
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\Interop.GVSINGLEPLAYERLib.dll
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\AxInterop.GVSINGLEPLAYERLib.dll
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.csproj.ResolveComReference.cache
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.Form1.resources
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.Properties.Resources.resources
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.csproj.GenerateResource.cache
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.csproj.CoreCompileInputs.cache
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.exe
+C:\Users\SG\Source\Repos\yuhsinnet\timeleapse\test1\TimeLeapse\obj\Debug\TimeLeapse.pdb
