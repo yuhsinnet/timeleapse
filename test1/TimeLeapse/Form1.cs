@@ -26,13 +26,13 @@ namespace TimeLeapse
 
         }
 
-        private void SnapShot(object state)
+        private void SnapShoting(object state)
         {
 
             bool SnapOK =
-axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
-                            "\\TimeLeapse\\image" + state.ToString() + ".jpg" );
-            
+            axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
+            "\\TimeLeapse\\image" + state.ToString() + ".jpg");
+
 
 
 
@@ -92,26 +92,43 @@ axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.M
 
         private void button2_Click(object sender, EventArgs e)
         {
-            axGVSinglePlayer1.GetBitmap(true, Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\image.bmp");
+
+           setDateTime.Value =  setDateTime.Value.AddMinutes(20);
+            
+
+
         }
 
         private void axGVSinglePlayer1_SearchEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEvent e)
         {
 
-            string NowTime = e.lpNowTime;
+            if (e.bOK)
+            {
+                string NowTime = e.lpNowTime;
 
-            System.Threading.Timer SnapTime
-      = new System.Threading.Timer(SnapShot, NowTime, 5000, Timeout.Infinite); //傳入調閱時間
-            label5.Text = "Search OK!  " + e.lpNowTime;
+                System.Threading.Timer SnapTime
+          = new System.Threading.Timer(SnapShoting, NowTime, 5000, Timeout.Infinite); //傳入調閱時間
+                label5.Text = "Search OK!  " + e.lpNowTime;
+
+            }
+            else label5.Text = "No Data!";
+            
+
 
         }
 
+
         private void button3_Click(object sender, EventArgs e)
+        {
+            SetSanp();
+        }
+
+        private void SetSanp()
         {
             int HostType = 0;
             int nDBType = 0; //Default value is 0. Reserved.
-            int nCamera = 2;
-            string lpDateTime = dateTimePicker1.Value.ToString("yyyyMMddHHmmss") + "002";
+            int nCamera = 7;
+            string lpDateTime = setDateTime.Value.ToString("yyyyMMddHHmmss") + "002";
 
             axGVSinglePlayer1.Search(HostType, nDBType, nCamera, lpDateTime);
         }

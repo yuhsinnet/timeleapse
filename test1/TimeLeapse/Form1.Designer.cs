@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.axGVSinglePlayer1 = new AxGVSINGLEPLAYERLib.AxGVSinglePlayer();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.setDateTime = new System.Windows.Forms.DateTimePicker();
             this.txtIP = new System.Windows.Forms.TextBox();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
@@ -42,8 +42,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.startDateTime = new System.Windows.Forms.DateTimePicker();
+            this.stopDateTime = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,15 +63,15 @@
             this.axGVSinglePlayer1.SearchEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEventHandler(this.axGVSinglePlayer1_SearchEvent);
             this.axGVSinglePlayer1.LoginEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_LoginEventHandler(this.axGVSinglePlayer1_LoginEvent);
             // 
-            // dateTimePicker1
+            // setDateTime
             // 
-            this.dateTimePicker1.CustomFormat = "yyyy/MM/dd HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(553, 34);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(142, 22);
-            this.dateTimePicker1.TabIndex = 2;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.setDateTime.CustomFormat = "yyyy/MM/dd HH:mm";
+            this.setDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.setDateTime.Location = new System.Drawing.Point(553, 34);
+            this.setDateTime.Name = "setDateTime";
+            this.setDateTime.Size = new System.Drawing.Size(142, 22);
+            this.setDateTime.TabIndex = 2;
+            this.setDateTime.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // txtIP
             // 
@@ -166,27 +166,27 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
-            this.button2.Text = "Get Bitmap";
+            this.button2.Text = "test";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dateTimePicker2
+            // startDateTime
             // 
-            this.dateTimePicker2.CustomFormat = "yyyy/MM/dd HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(553, 158);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(142, 22);
-            this.dateTimePicker2.TabIndex = 14;
+            this.startDateTime.CustomFormat = "yyyy/MM/dd";
+            this.startDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startDateTime.Location = new System.Drawing.Point(553, 158);
+            this.startDateTime.Name = "startDateTime";
+            this.startDateTime.Size = new System.Drawing.Size(100, 22);
+            this.startDateTime.TabIndex = 14;
             // 
-            // dateTimePicker3
+            // stopDateTime
             // 
-            this.dateTimePicker3.CustomFormat = "yyyy/MM/dd HH:mm";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(553, 186);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(142, 22);
-            this.dateTimePicker3.TabIndex = 15;
+            this.stopDateTime.CustomFormat = "yyyy/MM/dd";
+            this.stopDateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.stopDateTime.Location = new System.Drawing.Point(553, 186);
+            this.stopDateTime.Name = "stopDateTime";
+            this.stopDateTime.Size = new System.Drawing.Size(100, 22);
+            this.stopDateTime.TabIndex = 15;
             // 
             // label6
             // 
@@ -234,8 +234,8 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.dateTimePicker3);
-            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.stopDateTime);
+            this.Controls.Add(this.startDateTime);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -247,7 +247,7 @@
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.txtIP);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.setDateTime);
             this.Controls.Add(this.axGVSinglePlayer1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -261,7 +261,7 @@
         #endregion
 
         private AxGVSINGLEPLAYERLib.AxGVSinglePlayer axGVSinglePlayer1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker setDateTime;
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.TextBox txtUser;
@@ -273,8 +273,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker startDateTime;
+        private System.Windows.Forms.DateTimePicker stopDateTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
