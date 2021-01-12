@@ -23,6 +23,10 @@ namespace TimeLeapse
                                      txtUser.Text,
                                      txtPwd.Text);//   'Start login process
 
+            startDateTime.Value = DateTime.Today.AddDays(-30);
+            stopDateTime.Value = DateTime.Today; //將時間(時分)歸零
+
+            setDateTime.Value = DateTime.Today; //將時間(時分)歸零
 
         }
 
@@ -31,11 +35,11 @@ namespace TimeLeapse
 
             bool SnapOK =
             axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
-            "\\TimeLeapse\\image" + state.ToString() + ".jpg");
+            "\\TimeLeapsecam8\\image" + state.ToString() + ".jpg");
 
 
 
-
+            SetSanp();
             //throw new NotImplementedException();
         }
 
@@ -87,20 +91,30 @@ namespace TimeLeapse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\image.jpg");
+
+            startDateTime.Enabled = false;
+            stopDateTime.Enabled = false;
+
+            setDateTime.Value = startDateTime.Value;
+            SetSanp();
+
+
+            //axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + "\\image.jpg");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-           setDateTime.Value =  setDateTime.Value.AddMinutes(20);
-            
+            setDateTime.Value = setDateTime.Value.AddMinutes(20);
+
 
 
         }
 
         private void axGVSinglePlayer1_SearchEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEvent e)
         {
+
+
 
             if (e.bOK)
             {
@@ -111,8 +125,13 @@ namespace TimeLeapse
                 label5.Text = "Search OK!  " + e.lpNowTime;
 
             }
-            else label5.Text = "No Data!";
-            
+            else
+            {
+                SetSanp();
+                label5.Text = "No Data!";
+            }
+
+
 
 
         }
@@ -123,14 +142,31 @@ namespace TimeLeapse
             SetSanp();
         }
 
+        private delegate void addMinutesDelegate(int minut);
+        private void addMinut(int miunt)
+        {
+            setDateTime.Value = setDateTime.Value.AddMinutes(miunt); // 每次呼叫增加 miunt 分鐘
+        }
         private void SetSanp()
         {
             int HostType = 0;
             int nDBType = 0; //Default value is 0. Reserved.
-            int nCamera = 7;
+            int nCamera = 8;
             string lpDateTime = setDateTime.Value.ToString("yyyyMMddHHmmss") + "002";
 
-            axGVSinglePlayer1.Search(HostType, nDBType, nCamera, lpDateTime);
+            if (setDateTime.Value.CompareTo(stopDateTime.Value) < 0) //比較設定時間與目表時間關係
+            {
+                addMinutesDelegate minutesDelegate = new addMinutesDelegate(addMinut);
+                BeginInvoke(minutesDelegate, new object[] { 20 });
+                //setDateTime.Value = setDateTime.Value.AddMinutes(20); // 每次呼叫增加20分鐘
+                axGVSinglePlayer1.SearchAndPlay(HostType, nDBType, nCamera, lpDateTime);
+            }
+            else
+            {
+                label5.Text = "complet~";
+            }
+
+
         }
     }
 }

@@ -26,8 +26,18 @@ namespace DateTimePicktest
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            setdateTimePicker.Value = setdateTimePicker.Value.AddMinutes(20); // 每次呼叫增加20分鐘
-            if (setdateTimePicker.Value.CompareTo(stopDateTimePicker.Value) >= 0) //比較設定時間與目表時間關係
+            int comp = setdateTimePicker.Value.CompareTo(stopDateTimePicker.Value);
+
+            textBox1.AppendText(string.Format("comp:{0}\r\n", comp));
+
+
+            if (comp < 0) //比較設定時間與目表時間關係
+            {
+                
+                setdateTimePicker.Value = setdateTimePicker.Value.AddMinutes(20); // 每次呼叫增加20分鐘
+
+            }
+            else
             {
 
                 timer1.Enabled = false; //計時器暫停
