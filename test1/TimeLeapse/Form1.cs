@@ -35,7 +35,7 @@ namespace TimeLeapse
 
             bool SnapOK =
             axGVSinglePlayer1.SnapShot(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
-            "\\TimeLeapsecam8\\image" + state.ToString() + ".jpg");
+            "\\TimeLeapsecam" + txtCamNo.Text + "\\image" + state.ToString() + ".jpg");
 
 
 
@@ -147,11 +147,26 @@ namespace TimeLeapse
         {
             setDateTime.Value = setDateTime.Value.AddMinutes(miunt); // 每次呼叫增加 miunt 分鐘
         }
+
+        private delegate void labelTextUpdate(string str);
+        private void AddMessage(string sMessage)
+        {
+            if (this.InvokeRequired)
+            {
+                labelTextUpdate del = new labelTextUpdate(AddMessage);
+                this.Invoke(del, sMessage);
+            }
+            else
+            {
+                this.label5.Text += sMessage;
+            }
+        }
+
         private void SetSanp()
         {
             int HostType = 0;
             int nDBType = 0; //Default value is 0. Reserved.
-            int nCamera = 8;
+            int nCamera = int.Parse(txtCamNo.Text);
             string lpDateTime = setDateTime.Value.ToString("yyyyMMddHHmmss") + "002";
 
             if (setDateTime.Value.CompareTo(stopDateTime.Value) < 0) //比較設定時間與目表時間關係
@@ -163,7 +178,9 @@ namespace TimeLeapse
             }
             else
             {
-                label5.Text = "complet~";
+                //label5.Text = "complet~";
+                AddMessage("complet~");
+
             }
 
 
