@@ -169,7 +169,7 @@ namespace TimeLeapse
             int nCamera = int.Parse(txtCamNo.Text);
             string lpDateTime = setDateTime.Value.ToString("yyyyMMddHHmmss") + "002";
 
-            if (setDateTime.Value.CompareTo(stopDateTime.Value) < 0) //比較設定時間與目表時間關係
+            if (setDateTime.Value.Date.CompareTo(stopDateTime.Value.Date) < 0) //比較設定時間與目表時間關係
             {
                 addMinutesDelegate minutesDelegate = new addMinutesDelegate(addMinut);
                 BeginInvoke(minutesDelegate, new object[] { 20 });
