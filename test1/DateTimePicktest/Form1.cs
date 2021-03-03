@@ -26,12 +26,31 @@ namespace DateTimePicktest
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            int comp = setdateTimePicker.Value.CompareTo(stopDateTimePicker.Value);
+            int comp1 = setdateTimePicker.Value.CompareTo(stopDateTimePicker.Value);
 
-            textBox1.AppendText(string.Format("comp:{0}\r\n", comp));
+            int comp2 = setdateTimePicker.Value.Hour.CompareTo(8);
+            int comp3 = setdateTimePicker.Value.Hour.CompareTo(17);
 
 
-            if (comp < 0) //比較設定時間與目表時間關係
+            bool isWorkingTime = false;
+            if (comp2 >= 0)
+            {
+                if (comp3 < 0)
+                {
+                    isWorkingTime = true;
+                }
+            }
+            else isWorkingTime = false;
+
+
+            textBox1.AppendText(string.Format($"now is {setdateTimePicker.Value:HH:mm}\r\n"
+                                              + $"comp:{comp1}\r\n"
+                                              + $"comp2:{comp2}\r\n"
+                                              + $"comp3:{comp3}\r\n"
+                                              + $"iswork:{isWorkingTime}\r\n"));
+
+
+            if (comp1 < 0) //比較設定時間與目表時間關係
             {
                 
                 setdateTimePicker.Value = setdateTimePicker.Value.AddMinutes(20); // 每次呼叫增加20分鐘
@@ -52,7 +71,7 @@ namespace DateTimePicktest
         {
 
 
-            startDateTimePicker.Value = DateTime.Today.AddDays(-30);
+            startDateTimePicker.Value = DateTime.Today.AddDays(-1);
             stopDateTimePicker.Value = DateTime.Today; //將時間(時分)歸零
 
             setdateTimePicker.Value = DateTime.Today; //將時間(時分)歸零
