@@ -4,7 +4,7 @@
  * 2.自動偵測並創建擷取資料夾
  * 3.將左下角的OSD 移除
  * 4.解決影像過大問題
- * 5.使用FFMPEG
+ * 5.使用FFMPEG //ffmpeg -framerate 2 -i 'a (%d).jpg' -s:v 1920x1080 -c:v libx264 -crf 35 -pix_fmt yuv420p camera12.avi
  * 
  * 
  */
