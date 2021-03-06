@@ -63,6 +63,7 @@
             this.axGVSinglePlayer1.TabIndex = 0;
             this.axGVSinglePlayer1.LoginOK += new System.EventHandler(this.axGVSinglePlayer1_LoginOK);
             this.axGVSinglePlayer1.SearchEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEventHandler(this.axGVSinglePlayer1_SearchEvent);
+            this.axGVSinglePlayer1.Picture += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_PictureEventHandler(this.axGVSinglePlayer1_Picture);
             this.axGVSinglePlayer1.LoginEvent += new AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_LoginEventHandler(this.axGVSinglePlayer1_LoginEvent);
             // 
             // setDateTime

@@ -18,10 +18,10 @@
 
 
 using System;
-using System.Threading;
-using System.Windows.Forms;
 using System.Globalization;
 using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace TimeLeapse
 {
@@ -46,6 +46,8 @@ namespace TimeLeapse
 
             startDateTime.Value = DateTime.Today.AddDays(-30);
             stopDateTime.Value = DateTime.Today; //將時間(時分)歸零
+            stopDateTime.Value = DateTime.Parse("23:59");
+
 
             setDateTime.Value = DateTime.Today; //將時間(時分)歸零
 
@@ -115,7 +117,11 @@ namespace TimeLeapse
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            Startwork();
+        }
+        
+        private void Startwork()
+        {
             savepath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
 "\\TimeLeapsecam" + txtCamNo.Text;
 
@@ -133,6 +139,10 @@ namespace TimeLeapse
             stopDateTime.Enabled = false;
 
             setDateTime.Value = startDateTime.Value;
+
+            DateTimePickInvoke(setDateTime, startDateTime.Value);
+
+
             setdatetime = setDateTime.Value;
             SetSanp();
 
@@ -153,8 +163,8 @@ namespace TimeLeapse
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
             string NowTime = e.lpNowTime;
-            
-            
+
+
 
             if (e.bOK)
             {
@@ -202,13 +212,40 @@ namespace TimeLeapse
             }
         }
 
+        private delegate void uiup(Control control, string str);
+        private void contstr(Control control, string str)
+        {
+            if (this.InvokeRequired)
+            {
+                uiup del = new uiup(contstr);
+                this.Invoke(del, control, str);
+            }
+            else
+            {
+                control.Text = str;
+            }
+        }
+        private delegate void DateTimePickCB(Control control, DateTime dateTime);
+        private void DateTimePickInvoke(Control control, DateTime dateTime)
+        {
+            if (this.InvokeRequired)
+            {
+                DateTimePickCB del = new DateTimePickCB(DateTimePickInvoke);
+                this.Invoke(del, control, dateTime);
+            }
+            else
+            {
+                control. = dateTime;
+            }
+        }
+
         private void SetSanp()
         {
             int HostType = 0;
             int nDBType = 0; //Default value is 0. Reserved.
             int nCamera = int.Parse(txtCamNo.Text);
             string lpDateTime;
-             //setdatetime = setDateTime.Value;
+            //setdatetime = setDateTime.Value;
 
             if (setdatetime.Date.CompareTo(stopDateTime.Value.Date) < 0) //比較設定時間與目表時間關係
             {
@@ -247,11 +284,35 @@ namespace TimeLeapse
             else
             {
                 //label5.Text = "complet~";
-                AddMessage("complet~");
+                
+
+                int i = int.Parse(txtCamNo.Text);
+                i++;
+
+                if (i <= 12)
+                {
+
+
+                    contstr(txtCamNo, i.ToString());
+                    //txtCamNo.Text = i.ToString();
+
+
+
+                    Startwork();
+                    AddMessage("complet~");
+                }
+
+
+
 
             }
 
 
+        }
+
+        private void axGVSinglePlayer1_Picture(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_PictureEvent e)
+        {
+            Console.WriteLine("test");
         }
     }
 }
