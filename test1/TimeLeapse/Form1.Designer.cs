@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.axGVSinglePlayer1 = new AxGVSINGLEPLAYERLib.AxGVSinglePlayer();
             this.setDateTime = new System.Windows.Forms.DateTimePicker();
@@ -50,6 +51,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.txtCamNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.axGVSinglePlayer1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -235,6 +237,7 @@
             this.txtCamNo.Size = new System.Drawing.Size(100, 22);
             this.txtCamNo.TabIndex = 20;
             this.txtCamNo.Text = "7";
+            this.txtCamNo.TextChanged += new System.EventHandler(this.txtCamNo_TextChanged);
             // 
             // label9
             // 
@@ -244,6 +247,11 @@
             this.label9.Size = new System.Drawing.Size(50, 12);
             this.label9.TabIndex = 21;
             this.label9.Text = "cam No. :";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -303,6 +311,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox txtCamNo;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

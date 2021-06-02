@@ -1,10 +1,10 @@
 ﻿
 /*todo-list
- * 1.無資料不會自動跳過
- * 2.自動偵測並創建擷取資料夾
+ * V 1.無資料不會自動跳過
+ * V 2.自動偵測並創建擷取資料夾
  * 3.將左下角的OSD 移除
- * 4.解決影像過大問題
- * 5.使用FFMPEG //ffmpeg -framerate 2 -i 'a (%d).jpg' -s:v 1920x1080 -c:v libx264 -crf 35 -pix_fmt yuv420p camera12.avi
+ * V 4.解決影像過大問題
+ * V 5.使用FFMPEG //ffmpeg -f concat -r 2 -i list.txt -s:v 1920x1080 -c:v libx264 -crf 35 -pix_fmt yuv420p camera7.avi
  * 
  * 
  */
@@ -20,7 +20,6 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace TimeLeapse
@@ -31,9 +30,10 @@ namespace TimeLeapse
         {
             InitializeComponent();
         }
-
+        CultureInfo provider = CultureInfo.InvariantCulture;
         string savepath;
         DateTime setdatetime;
+        string GetThisTime;
         private void Form1_Load(object sender, EventArgs e)
         {
             axGVSinglePlayer1.ShowTreeList = true;
@@ -44,9 +44,15 @@ namespace TimeLeapse
                                      txtUser.Text,
                                      txtPwd.Text);//   'Start login process
 
-            startDateTime.Value = DateTime.Today.AddDays(-30);
-            stopDateTime.Value = DateTime.Today; //將時間(時分)歸零
-            stopDateTime.Value = DateTime.Parse("23:59");
+            //startDateTime.Value = DateTime.Today.AddMonths(-1);
+            string datestr = $"{DateTime.Today.Year}{DateTime.Today.Month - 1:d2}01000000";
+            DateTime dateTime = DateTime.ParseExact(datestr, "yyyyMMddHHmmss", null);
+            startDateTime.Value = dateTime;
+
+
+            string stopdatestr = $"{DateTime.Today.Year}{DateTime.Today.Month:d2}01000000";
+            stopDateTime.Value = DateTime.ParseExact(stopdatestr, "yyyyMMddHHmmss", null).AddDays(-1); //將時間(時分)歸零
+            //stopDateTime.Value = DateTime.Parse("23:59");
 
 
             setDateTime.Value = DateTime.Today; //將時間(時分)歸零
@@ -57,13 +63,15 @@ namespace TimeLeapse
 
         }
 
-        private void SnapShoting(object state)
+        private void SnapShoting(object sender, System.Timers.ElapsedEventArgs e)
         {
 
+
+
             bool SnapOK =
-            axGVSinglePlayer1.SnapShot(savepath + "\\image" + state.ToString() + ".jpg");
+            axGVSinglePlayer1.SnapShot(savepath + "\\image" + GetThisTime + ".jpg");
 
-
+            WriteList(savepath + "\\list.txt","file image" + GetThisTime + ".jpg");
 
             SetSanp();
             //throw new NotImplementedException();
@@ -119,7 +127,7 @@ namespace TimeLeapse
         {
             Startwork();
         }
-        
+
         private void Startwork()
         {
             savepath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) +
@@ -139,10 +147,6 @@ namespace TimeLeapse
             stopDateTime.Enabled = false;
 
             setDateTime.Value = startDateTime.Value;
-
-            DateTimePickInvoke(setDateTime, startDateTime.Value);
-
-
             setdatetime = setDateTime.Value;
             SetSanp();
 
@@ -162,16 +166,19 @@ namespace TimeLeapse
         private void axGVSinglePlayer1_SearchEvent(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_SearchEvent e)
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
-            string NowTime = e.lpNowTime;
+            GetThisTime = e.lpNowTime;
 
 
 
             if (e.bOK)
             {
-                setDateTime.Value = DateTime.ParseExact(NowTime, "yyyyMMddHHmmssfff", provider);
+                setDateTime.Value = DateTime.ParseExact(GetThisTime, "yyyyMMddHHmmssfff", provider);
 
-                System.Threading.Timer SnapTime
-          = new System.Threading.Timer(SnapShoting, NowTime, 5000, Timeout.Infinite); //傳入調閱時間
+                System.Timers.Timer SnapTime = new System.Timers.Timer(5000); //傳入調閱時間
+                SnapTime.Elapsed += SnapShoting;
+                SnapTime.AutoReset = false;
+                SnapTime.Start();
+                
                 label5.Text = "Search OK!  " + e.lpNowTime;
 
             }
@@ -185,7 +192,6 @@ namespace TimeLeapse
 
 
         }
-
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -225,19 +231,7 @@ namespace TimeLeapse
                 control.Text = str;
             }
         }
-        private delegate void DateTimePickCB(Control control, DateTime dateTime);
-        private void DateTimePickInvoke(Control control, DateTime dateTime)
-        {
-            if (this.InvokeRequired)
-            {
-                DateTimePickCB del = new DateTimePickCB(DateTimePickInvoke);
-                this.Invoke(del, control, dateTime);
-            }
-            else
-            {
-                control. = dateTime;
-            }
-        }
+
 
         private void SetSanp()
         {
@@ -247,7 +241,7 @@ namespace TimeLeapse
             string lpDateTime;
             //setdatetime = setDateTime.Value;
 
-            if (setdatetime.Date.CompareTo(stopDateTime.Value.Date) < 0) //比較設定時間與目表時間關係
+            if (setdatetime.Date.CompareTo(stopDateTime.Value.Date) <= 0) //比較設定時間與目表時間關係
             {
 
                 int comp2 = setdatetime.Hour.CompareTo(8);
@@ -284,7 +278,7 @@ namespace TimeLeapse
             else
             {
                 //label5.Text = "complet~";
-                
+
 
                 int i = int.Parse(txtCamNo.Text);
                 i++;
@@ -297,8 +291,8 @@ namespace TimeLeapse
                     //txtCamNo.Text = i.ToString();
 
 
+                    //timer1.Start();
 
-                    Startwork();
                     AddMessage("complet~");
                 }
 
@@ -313,6 +307,38 @@ namespace TimeLeapse
         private void axGVSinglePlayer1_Picture(object sender, AxGVSINGLEPLAYERLib._DGVSinglePlayerEvents_PictureEvent e)
         {
             Console.WriteLine("test");
+        }
+
+
+        private void txtCamNo_TextChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(txtCamNo.Text);
+
+            Startwork();
+            timer1.Enabled = false;
+            Console.WriteLine("Restart new mission");
+            Console.WriteLine(txtCamNo.Text);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //Startwork();
+            //timer1.Enabled = false;
+            //Console.WriteLine("Restart new mission");
+            //Console.WriteLine(txtCamNo.Text);
+
+        }
+        /// <summary>
+        /// 寫入TXT 資料
+        /// </summary>
+        /// <param name="title">檔名或路徑</param>
+        /// <param name="value">寫入內容</param>
+        private static void WriteList(string title, string value)
+        {
+            StreamWriter sw = new StreamWriter(title, true, System.Text.Encoding.ASCII);
+
+            sw.WriteLine(value);
+            sw.Close();
         }
     }
 }
