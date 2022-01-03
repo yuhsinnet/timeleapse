@@ -54,9 +54,9 @@ namespace TimeLeapse
             DateTime dateTime = DateTime.ParseExact(datestr, "yyyyMMddHHmmss", null);
             startDateTime.Value = dateTime;
 
-
-            string stopdatestr = $"{DateTime.Today.Year}{DateTime.Today.Month:d2}01000000";
-            stopDateTime.Value = DateTime.ParseExact(stopdatestr, "yyyyMMddHHmmss", null).AddDays(-1); //將時間(時分)歸零
+            string stopday = $"{dateTime.AddMonths(1).AddDays(-1).Day:d2}";
+            string stopdatestr = $"{staryear + starmonth+ stopday}235900";
+            stopDateTime.Value = DateTime.ParseExact(stopdatestr, "yyyyMMddHHmmss", null); //將時間(時分)歸零
             //stopDateTime.Value = DateTime.Parse("23:59");
 
 
