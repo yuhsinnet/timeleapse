@@ -45,7 +45,12 @@ namespace TimeLeapse
                                      txtPwd.Text);//   'Start login process
 
             //startDateTime.Value = DateTime.Today.AddMonths(-1);
-            string datestr = $"{DateTime.Today.Year}{DateTime.Today.AddMonths(-1):d2}01000000";
+            //string datestr = $"{DateTime.Today.Year}{DateTime.Today.AddMonths(-1):d2}01000000";
+
+            string staryear = $"{DateTime.Today.AddMonths(-1).Year:d4}";
+            string starmonth = $"{DateTime.Today.AddMonths(-1).Month:d2}";
+
+            string datestr = $"{staryear + starmonth}01000000";
             DateTime dateTime = DateTime.ParseExact(datestr, "yyyyMMddHHmmss", null);
             startDateTime.Value = dateTime;
 
