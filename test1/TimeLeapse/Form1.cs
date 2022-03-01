@@ -55,7 +55,7 @@ namespace TimeLeapse
             startDateTime.Value = dateTime;
 
             string stopday = $"{dateTime.AddMonths(1).AddDays(-1).Day:d2}";
-            string stopdatestr = $"{staryear + starmonth+ stopday}235900";
+            string stopdatestr = $"{staryear + starmonth + stopday}235900";
             stopDateTime.Value = DateTime.ParseExact(stopdatestr, "yyyyMMddHHmmss", null); //將時間(時分)歸零
             //stopDateTime.Value = DateTime.Parse("23:59");
 
@@ -71,12 +71,17 @@ namespace TimeLeapse
         private void SnapShoting(object sender, System.Timers.ElapsedEventArgs e)
         {
 
-
+            string fileName = "image" + GetThisTime + txtCamNo.Text.PadLeft(2, '0') + ".jpg";
 
             bool SnapOK =
-            axGVSinglePlayer1.SnapShot(savepath + "\\image" + GetThisTime + ".jpg");
+            axGVSinglePlayer1.SnapShot(savepath + "\\"+ fileName);
 
-            WriteList(savepath + "\\list.txt","file image" + GetThisTime + ".jpg");
+
+            //確認截圖正確寫入紀錄
+            if (SnapOK) WriteList(savepath + "\\list.txt", "file " + fileName);
+
+
+
 
             SetSanp();
             //throw new NotImplementedException();
@@ -183,7 +188,7 @@ namespace TimeLeapse
                 SnapTime.Elapsed += SnapShoting;
                 SnapTime.AutoReset = false;
                 SnapTime.Start();
-                
+
                 label5.Text = "Search OK!  " + e.lpNowTime;
 
             }
@@ -299,6 +304,9 @@ namespace TimeLeapse
                     //timer1.Start();
 
                     AddMessage("complet~");
+
+                    //完成後登出
+                    axGVSinglePlayer1.Logout();
                 }
 
 
