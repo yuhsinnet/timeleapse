@@ -305,8 +305,8 @@ namespace TimeLeapse
 
                     AddMessage("complet~");
 
-                    //完成後登出
-                    axGVSinglePlayer1.Logout();
+                    ////完成後登出
+                    //axGVSinglePlayer1.Logout();
                 }
 
 
