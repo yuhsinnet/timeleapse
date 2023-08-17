@@ -293,7 +293,7 @@ namespace TimeLeapse
                 int i = int.Parse(txtCamNo.Text);
                 i++;
 
-                if (i <= 12)
+                if (i <= 3)
                 {
 
 

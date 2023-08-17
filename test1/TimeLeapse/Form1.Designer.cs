@@ -84,7 +84,7 @@
             this.txtIP.Name = "txtIP";
             this.txtIP.Size = new System.Drawing.Size(100, 22);
             this.txtIP.TabIndex = 3;
-            this.txtIP.Text = "192.168.0.201";
+            this.txtIP.Text = "192.168.0.222";
             // 
             // txtPort
             // 
@@ -108,7 +108,7 @@
             this.txtPwd.Name = "txtPwd";
             this.txtPwd.Size = new System.Drawing.Size(100, 22);
             this.txtPwd.TabIndex = 6;
-            this.txtPwd.Text = "54";
+            this.txtPwd.Text = "Admin-123";
             // 
             // label1
             // 
@@ -236,7 +236,7 @@
             this.txtCamNo.Name = "txtCamNo";
             this.txtCamNo.Size = new System.Drawing.Size(100, 22);
             this.txtCamNo.TabIndex = 20;
-            this.txtCamNo.Text = "7";
+            this.txtCamNo.Text = "1";
             this.txtCamNo.TextChanged += new System.EventHandler(this.txtCamNo_TextChanged);
             // 
             // label9
